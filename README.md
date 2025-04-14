@@ -15,7 +15,20 @@
 1. GET /atm/balance/{accountNumber}
 2. POST /auth/register
    {
-    "username": "your_username",
-    "password": "your_password"
+      "username": "your_username",
+      "password": "your_password"
    }
-   
+
+3. POST /atm/deposit
+   {
+     "accountNumber": "acct_num",
+     "balance": "your_balance"
+   }
+
+4. POST /atm/wtithdraw
+   {
+     "accountNumber": "acct_num",
+     "balance": "your_balance"
+   }
+
+5. GET /transactions/{accountNumber}
