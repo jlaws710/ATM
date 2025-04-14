@@ -1,13 +1,14 @@
 package com.atm.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -16,18 +17,6 @@ public class Account {
     private Long id;
     private String accountNumber;
     private BigDecimal balance;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users users;
-
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
 
     public Long getId() {
         return id;
@@ -51,5 +40,16 @@ public class Account {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transactions> transactions;
+
+    public List<Transactions> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transactions> transactions) {
+        this.transactions = transactions;
     }
 }

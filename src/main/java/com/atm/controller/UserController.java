@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 
 @RestController
 @RequestMapping("/auth")
@@ -38,13 +37,10 @@ public class UserController {
         Account account = new Account();
         account.setAccountNumber("ACC" + System.currentTimeMillis());
         account.setBalance(new BigDecimal("0.00"));
-        account.setUsers(users);
-
-        users.setAccounts(Collections.singletonList(account));
 
         userRepository.save(users);
         accountRepository.save(account);
 
-        return "User registered successfully";
+        return "User registered successfully with account number " + account.getAccountNumber();
     }
 }

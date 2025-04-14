@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS account (
     id SERIAL PRIMARY KEY,
     account_number VARCHAR(16) NOT NULL UNIQUE,
     balance NUMERIC(19, 2) NOT NULL,
-    user_id INTEGER REFERENCES users (id)
 );
 
 -- Create users table
@@ -11,6 +10,14 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS transactions (
+    id SERIAL PRIMARY KEY,
+    account_id INT REFERENCES account(id),
+    amount NUMERIC(19, 2) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    timestamps TIMESTAMP NOT NULL
 );
 
 -- Insert sample users
